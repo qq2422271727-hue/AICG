@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Camera begins at the level's left boundary
+PASS: Turning in place never shifts the background
+PASS: Small movement inside the quiet zone keeps scenery fixed
+PASS: Camera starts tracking beyond the right margin
+PASS: Instant facing reversal does not flick camera position
+PASS: Reversing within the quiet zone leaves scenery stable
+PASS: Camera tracks after passing the left margin
+PASS: Jumping does not bob the whole scene vertically
+PASS: Camera clamps at the far edge of the map
+PASS: Restart snaps the camera back to the start
+PASS: Restart resets the displayed center, not only its target
+PASS: Repeated rapid reversals and jumps leave the displayed scenery still
+PASS: Actual camera scroll is smoothed instead of snapping to the target
+PASS: Pausing freezes in-progress camera smoothing
+PASS: Camera smoothing resumes after unpausing
+PASS: Checkpoint snap clears any residual combat shake
+PASS: Checkpoint snap immediately places the displayed center at the respawn point
+PASS: Automatic checkpoint respawn restores the player
+PASS: Automatic checkpoint respawn resets the displayed center
+PASS: Teleport beyond the left edge stays inside the map
+PASS: Teleport beyond the right edge stays inside the map
+PASS: Movement at the exact right dead-zone margin does not change the target
+PASS: Movement at the exact left dead-zone margin does not change the target
+PASS: Wide landscape phone framing preserves the logical camera center
+PASS: Tablet framing preserves the level-edge camera clamp
+RESULT: 25/25 camera checks passed

@@ -1,12 +1,14 @@
-; Ashwake — original action prototype. Open with Godot 4.3 or later.
+; Ashwake — original action prototype. Validated with Godot 4.7.2.
 config_version=5
 
 [application]
 config/name="ASHWAKE — The Last Relay"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/description="An original, compact side-scrolling action prototype."
-config/version="0.3-stable-camera-preview"
+; GitSync main pulls receive v0.5 only after this version is merged into main.
+; Before that merge, main still contains the previous main-branch code.
+config/version="0.5"
 config/icon="res://assets/icon.svg"
 
 [display]

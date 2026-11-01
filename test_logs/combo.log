@@ -1,0 +1,83 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: One attack press starts A once
+PASS: Existing 140 ms input buffer retained, not reinterpreted as percent
+PASS: A starts in non-damaging startup
+PASS: 49 ms cannot damage
+PASS: A active begins at exactly 50 ms
+PASS: First A contact damages once, repeated target rejects
+PASS: A can hit distinct targets; de-duplication is not global
+PASS: Contact exposes hit-confirmed state
+PASS: A remains active at 166 ms
+PASS: A active end 167 ms is half-open and cannot damage
+PASS: Unbuffered A completes at exactly 300 ms
+PASS: Holding/no new edge never repeats attacks
+PASS: Hit-confirmed second input does not cancel A active frames
+PASS: Buffered hit-confirm A > B enters at exactly 167 ms
+PASS: B gets new serial, empty hit set and reset hit-confirm state
+PASS: B startup is distinct and cannot deal inherited contact damage
+PASS: B startup lasts 67 ms, not A's 50 ms
+PASS: B can damage the same target once under its new serial
+PASS: B active range ends exactly at 167 ms
+PASS: No B > A cancel route: B recovery cannot be skipped
+PASS: Valid late B buffer starts fresh A only after full 300 ms B
+PASS: Whiff cannot take hit-only 167 ms cancel route
+PASS: Whiff A > B only opens at 233 ms
+PASS: Too-early second tap expires after 140 ms; it does not become permanent intent
+PASS: Cancel close at exactly 280 ms is exclusive
+PASS: Late closed-window input queues fresh A at full recovery, never stale B
+PASS: Hit-stop freezes state/clock even when the cancel window is open
+PASS: Hit-stop preserves a fresh buffered tap's full lifetime
+PASS: Buffered B begins only on hit-stop release; remaining time advances once
+PASS: dodge atomically clears attack, pending combo and hit state
+PASS: dodge cannot leak buffered B after interrupt
+PASS: hurt atomically clears attack, pending combo and hit state
+PASS: hurt cannot leak buffered B after interrupt
+PASS: death atomically clears attack, pending combo and hit state
+PASS: death cannot leak buffered B after interrupt
+PASS: respawn atomically clears attack, pending combo and hit state
+PASS: respawn cannot leak buffered B after interrupt
+PASS: Respawn unlocks fresh attack input
+PASS: Locked dead state ignores attacks rather than accumulating input
+PASS: Reset clears death lock and serial for reproducible tests
+PASS: A hitbox stays exactly v0.4-sized and mirrors around the body
+PASS: 30 Hz: exactly two attacks/two hits; no duplicate damage or repeated hold
+PASS: 60 Hz: exactly two attacks/two hits; no duplicate damage or repeated hold
+PASS: 120 Hz: exactly two attacks/two hits; no duplicate damage or repeated hold
+PASS: Standalone native A/B/idle PNG resources load
+PASS: All clips preserve fixed 128x96 frame and (46,77) pivot
+PASS: Production A and B each total 300 ms in native animation metadata
+PASS: B starts from its own low preload frame
+PASS: B contact frame 4 aligns to its 67 ms active boundary
+PASS: B recovery frame 8 aligns to 167 ms and mirrors around fixed pivot
+PASS: B atlas never runs ahead of frozen physics clock
+PASS: B is a distinct authored atlas, not A replayed faster
+PASS: All B pixels use binary alpha and clear the untrimmed canvas borders
+PASS: All 15 B frames keep boots on the same y=77 floor
+PASS: B has at least 12 distinct poses / 13 frames not found anywhere in A
+B_POSE_COUNTS: distinct=13 novel_vs_all_A=15
+PASS: Production touch and keyboard share the one attack action
+PASS: Production preserves all 11 v0.4 clips and adds only B
+PASS: Real main-scene attack input starts A and damages a real sentry once
+PASS: Real sentry contact uses the existing world impact timer
+PASS: Global hit-stop freezes production attack time AND buffered input
+PASS: Contact cannot advance to B during the same hit-stop
+PASS: Production A > B hits the same sentry exactly once per stage
+PASS: Real B selects its rising atlas and does not reuse A's horizontal slash FX
+PASS: B recovery completes without repeated damage
+PASS: Held keyboard attack produces one A, never automatic B or repeat
+PASS: Production airborne A retains jump physics
+PASS: Production airborne input chains into B without root-motion teleport
+PASS: Actual dodge input cancels B and clears pending attack/hit state
+PASS: Cancelled B does not reappear after dodge
+PASS: Actual hurt cancels state, buffer, pose and FX atomically
+PASS: Death locks attack input rather than storing a stale combo
+PASS: Respawn clears death lock and immediately resets native pose
+PASS: Touch A executes while a second finger holds the movement stick
+PASS: Same native touch button chains B while player keeps moving
+PASS: Holding the second touch does not auto-repeat beyond A > B
+PASS: Touch release leaves no sticky movement or attack action
+PASS: Legacy attack_time seek reconstructs A in the single machine, not a shadow clock
+PASS: Legacy zero clock atomically clears the same machine
+LIMITATION: headless logic/native atlas/input routing only; no physical Android or GPU playtest
+RESULT: 78/78 checks passed

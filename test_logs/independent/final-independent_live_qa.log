@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+LIVE_REACH: initial_gap=35.0 moving=false hits=2 b_enter_gap=54.82 b_active_gap=60.32
+LIVE_REACH: initial_gap=50.0 moving=false hits=2 b_enter_gap=69.82 b_active_gap=75.32
+LIVE_REACH: initial_gap=55.0 moving=false hits=2 b_enter_gap=74.82 b_active_gap=80.32
+LIVE_REACH: initial_gap=60.0 moving=false hits=2 b_enter_gap=79.82 b_active_gap=85.32
+LIVE_REACH: initial_gap=70.0 moving=false hits=1 b_enter_gap=89.82 b_active_gap=92.09
+LIVE_REACH: initial_gap=85.0 moving=false hits=1 b_enter_gap=104.82 b_active_gap=107.09
+LIVE_REACH: initial_gap=35.0 moving=true hits=2 b_enter_gap=36.69 b_active_gap=35.12
+LIVE_REACH: initial_gap=50.0 moving=true hits=2 b_enter_gap=51.69 b_active_gap=50.12
+LIVE_REACH: initial_gap=55.0 moving=true hits=2 b_enter_gap=56.69 b_active_gap=55.12
+LIVE_REACH: initial_gap=60.0 moving=true hits=2 b_enter_gap=61.69 b_active_gap=60.12
+LIVE_REACH: initial_gap=70.0 moving=true hits=2 b_enter_gap=71.69 b_active_gap=70.12
+LIVE_REACH: initial_gap=85.0 moving=true hits=2 b_enter_gap=86.69 b_active_gap=81.89
+INDEPENDENT_LIVE_QA: 719/719 passed

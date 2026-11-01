@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Real contact hit-stop survives at least two 60Hz rendered-frame observations
+PASS: Attack elapsed, native sprite frame and full input buffer remain unchanged throughout real hit-stop
+PASS: Real hit-stop exits without stuck global slow motion
+PASS: Hit-stop release does not skip A directly to B
+PASS: Input buffered during real freeze produces exactly B after resume
+PASS: Physics-triggered scale change does not erase 45ms freeze in contact frame
+PASS: Following scaled frame consumes one real 60Hz step, not one slow step
+PASS: Three real 60Hz steps finish the 45ms freeze
+PASS: Restart atomically clears freeze, scale bookkeeping and shake
+INDEPENDENT_HITSTOP_QA: 9/9 passed; actual frozen frame samples=3

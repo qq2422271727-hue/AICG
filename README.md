@@ -1,91 +1,165 @@
-# ASHWAKE — The Last Relay
+# ASHWAKE — The Last Relay · v0.5
 
-An original, small 2D action-game prototype. A ceramic-masked courier crosses a ruined aqueduct, takes three relay seals from broken sentries, and restores its final beacon. All art is original code-drawn geometry; there are no third-party game assets or borrowed characters, maps, music, or story.
+**A complete playable Godot project, not the isolated combat/map proof.**
+The ceramic-masked courier must recover three seals from ruined sentries,
+cross two gaps and activate the eastern relay. Version 0.5 integrates a
+second attack and original aqueduct pixel artwork into the existing game.
 
-## Run in Godot
+Status: source validated with **Godot 4.7.2.stable.official.ed1daf0bf**,
+Compatibility renderer. The v0.5 integration was prepared independently of
+the frozen v0.4 source. Once v0.5 is merged into the public repository's
+`main` branch, GitSync users can obtain it through the update workflow below.
+No physical Android device, emulator or real-GPU visual playtest was performed
+by the integration task. Automated success does not establish mobile frame
+rate, touch feel or rendered pixel quality.
 
-1. Install **Godot 4.3 or later**, standard build (no .NET needed).
-2. Import `project.godot` and press **F6/F5**, or run:
-   ```sh
-   godot --path /absolute/path/to/pixel_action_poc
-   ```
-3. Run right, defeat all three sentries, and press **E** at the eastern beacon. A first run should take roughly 30–60 seconds, depending on combat and exploration.
+## Open and play
 
-### Open the source on a phone with Godot 4.7 Android Editor
-
-For repeatable phone updates from the public [ASHWAKE source repository](https://github.com/qq2422271727-hue/AICG), follow the Chinese [Android sync guide](ANDROID_SYNC_GUIDE.md). The recommended phone workflow is **GitSync Client mode**, without Termux: try the public HTTPS clone URL without login if the installed version offers that option; otherwise use the documented GitHub OAuth flow. Choose **Nested clone** into **Documents**, then import **`Documents/AICG/project.godot`** in Godot. GitSync requests broad **All files access**, not access limited to the project; review that permission and any OAuth authorization before accepting. Do not create or share a personal access token for this workflow.
-
-For later updates, save and close Godot, check that the phone has no local changes or commits, then manually choose **Pull Changes** in GitSync. Keep automatic sync disabled. Do not use **Force Pull**, **Force Push**, **Push Changes**, or **Sync All Changes** for this download-only workflow; stop and back up if local changes or conflicts appear. Reopen the same project in Godot after a successful pull. No game APK or source ZIP re-download is needed for ordinary source updates; an independently installed APK does not update with the source. This GitSync workflow has not been tested on an Android device in this environment. The guide retains Termux as an optional fallback; public Git cloning/pulling itself does not require login.
-
-For a one-time import without Git, use the ZIP steps below. Keep only one active project: the GitSync clone **or** the ZIP copy, not both.
-
-1. Download `ASHWAKE_v0.3_Godot_Source.zip` to the phone's **Downloads** folder. This archive has `project.godot` at the ZIP root, ready for import.
-2. Open the Godot Android Editor **Project Manager**, choose **Import**, and select that ZIP (or extract it and select its `project.godot`).
-3. If the file is not visible, allow Godot access to device files in Android settings, then try again. Import the source archive, **not the APK**.
-4. Open the imported project and tap the **Play** button to run. A Bluetooth mouse and keyboard can make editing scripts much easier on small phone screens.
-
-The Android Editor is still an early-access editor, but this game uses GDScript and the Compatibility renderer, not C# or Forward+.
-
-## Android APK preview
-
-The separate `ASHWAKE_Android_Touch_v0.3.apk` build is a **debug-signed installable APK** generated with the official Godot 4.7.2 Android export template and Android SDK Build-Tools 36.0.0. It targets Android 36, supports Android 7.0 (API 24) and later, uses the `arm64-v8a` architecture, and requests no Android permissions. It is a prototype intended for manual installation, not a Play Store release.
-
-To install on your own Android phone, download the APK, open it in a file manager, permit installation from that file-manager app if Android prompts you, then install and launch **ASHWAKE**. The orientation is landscape. Do not leave broad unknown-app installation permission enabled unnecessarily.
-
-For reproducible command-line export after configuring Godot's Android SDK, JDK 17 and export templates:
+1. Import this folder's `project.godot` in Godot **4.7.2 standard**, then press F5.
+2. On the Android Editor, choose one source workflow:
+   - **GitHub / GitSync:** follow `ANDROID_SYNC_GUIDE.md` to clone the public
+     repository's `main` branch into `Documents/AICG`, or safely pull updates
+     into your existing clean clone after v0.5 has been merged into `main`.
+   - **Standalone source ZIP:** extract the supplied v0.5 source ZIP, or a
+     source ZIP downloaded from GitHub, into a new folder and import its root
+     `project.godot`. GitHub ZIP filenames and top-level folders can vary.
+     A ZIP extraction is not a Git clone and does not receive GitSync pulls.
+   Do not overwrite a phone project with local edits. This is source, not an APK.
+3. Move right, defeat all three sentries, cross the gaps and press **E / USE**
+   at the final relay. The original health, death, checkpoints and restart loop
+   remain playable. Ground and upper platforms remain solid from both sides.
 
 ```sh
-godot --headless --path /absolute/path/to/pixel_action_poc --export-debug Android /absolute/path/to/ASHWAKE_Android_Touch_v0.3.apk
+godot --path /absolute/path/to/AICG
 ```
 
-The supplied debug signing key was generated in an isolated build environment and **is not included in the source ZIP**. A future release should use a persistent release keystore, a different package name, and proper device testing. Installing an independently re-signed debug build over this preview may require uninstalling the earlier one first.
+GitSync pulls the selected branch, not a standalone ZIP or an unmerged branch.
+After v0.5 is merged into `main`, pull `main` and reopen the same
+`Documents/AICG/project.godot`; do not switch to an older ZIP copy.
+Until that merge, pulling `main` still retrieves the previous main-branch code.
+Keep ZIP projects separate from the GitSync-managed folder.
+An independently installed APK never updates when source is changed.
 
 ## Controls
 
-| Action | Keys |
-| --- | --- |
-| Move | A / D or Left / Right |
-| Jump / air jump | Space, W or Up |
-| Light melee attack | J or X |
-| Dodge, including in air | Shift or K |
-| Activate final relay | E |
-| Restart entire run, including enemy respawns | R |
-| Pause | Esc |
+| Action | Desktop | Android touch |
+|---|---|---|
+| Move | A/D or left/right | Left joystick |
+| Jump / air jump | Space, W or up | JUMP |
+| Attack A, then chain B | Tap J/X, then tap again | Tap ATK, then tap again |
+| Dodge / cancel attack | Shift or K | DASH |
+| Activate relay | E | USE |
+| Pause | Esc | II |
+| Full restart | R | RST |
 
-On an Android touchscreen, the game uses **landscape orientation** and an on-screen layout: drag the left joystick to run; on the right, use **JUMP**, **ATK**, **DASH**, and **USE**. The top-right controls are **II** (pause/resume) and **RST** (restart). Two or more fingers work simultaneously (for example, move while attacking or jumping). Touch buttons are hidden when playing on a desktop without a touchscreen.
+The same `attack` action drives both attacks and both input methods. There is
+no B button. Holding ATK/J does not repeat or automatically chain. The original
+multi-touch implementation still permits movement plus attack/jump/dodge.
 
-**v0.3 camera:** rapid changes in movement direction no longer shift the whole background. The camera stays still while the player moves within a 120-pixel margin on either side of the tracked center, then smoothly follows for longer traversal. The camera is vertically stable during jumps, freezes when paused, and immediately resets on checkpoint respawns or full restarts without carrying over combat shake. Parallax backgrounds use the actual smoothed camera screen center instead of the unsmoothed target. Brief intentional impact shake remains during combat.
+## Two-strike combat
 
-Jump height responds to release. Attacks can be buffered near the end of recovery; dodging cancels an attack. Dodge lasts 0.22 seconds, has 0.19 seconds of invulnerability and a 0.62 second cooldown. The orange enemy marker telegraphs an attack for 0.55 seconds. Dodge through the strike or punish its recovery.
+A is the existing forward cut; B uses **15 new low-windup, rising-cut frames**,
+not a speed/color variation of A. The original 11 animation clips are preserved.
+B has the same fixed 128×96 canvas and (46,77) foot pivot. Only the visual child
+flips; collider, movement speed, gravity and jump values are unchanged.
 
-Two checkpoints preserve recovered seals after death. Unbeaten sentries reset on player respawn; beaten sentries remain down until a full restart. Falling costs a life/run death, not progress on recovered seals. R resets everything and respawns every sentry.
+| Stage | Startup | Active interval | Recovery | Full un-cancelled duration |
+|---|---:|---|---:|---:|
+| A | 50 ms | [50,167) ms | 133 ms | 300 ms |
+| B | 67 ms | [67,167) ms | 133 ms | 300 ms |
 
-## Structure
+Input buffer: **140 ms**, not 14%. Hit-confirmed A can enter B from 167 ms;
+whiffed A can enter B from 233 ms. Both windows close before 280 ms. Too-early
+taps expire; taps after the close queue a fresh A after A's full recovery,
+not a stale B. B never early-cancels back to A. A live late buffer may start a
+new A only after B's 300 ms finishes. Landing is not required to chain.
 
-- `scenes/main.tscn`: tiny bootstrap scene.
-- `scripts/world.gd`: input mapping, level assembly, checkpoints, camera, win/reset flow and environment art.
-- `scripts/player.gd`: movement, coyote time, input buffers, double jump, dodge, light attack and health.
-- `scripts/enemy.gd`: patrol/chase/telegraph/strike/recover/hurt/dead state machine.
-- `scripts/effects.gd`: shared particles and dodge afterimages.
-- `scripts/hud.gd`: health, dodge cooldown, objectives, controls and result screen.
-- `scripts/touch_controls.gd`: responsive multi-touch virtual stick and six action buttons.
+Each stage has its own serial and hit-target set: one damage per target per
+stage. A retains its 70×53 forward hitbox; B uses a 62×76 higher hitbox. B is
+shorter horizontally, so a tip-range A that knocks a sentry away can whiff B;
+start closer or keep moving toward the target. Independent real-enemy tests
+confirmed A+B at static starting distances of 35–60px, A-only at 70/85px, and
+A+B at all six tested distances while holding movement toward the enemy.
+B does not add root-motion slide. A's end is now explicitly half-open at 167ms;
+the former inclusive endpoint no longer permits damage on that exact boundary.
 
-The fixed physics step is 60 Hz; rendering uses the lightweight compatibility renderer. Damage is evaluated with explicit directional hit rectangles; each light swing can damage each target only once. Player/enemy bodies collide with terrain but not each other, so invulnerable rolls can cross an enemy cleanly. Platforms are solid rather than one-way.
+Dodge, hurt, death and respawn atomically clear old attack/buffer/hit state.
+The existing world's impact timer drives freeze; no second local hit-stop or
+camera shake is layered on top. Attack pose and buffered input stop together.
+The v0.4 hit-stop timer's same-frame time-scale bug is corrected (see changelog).
+A keeps its licensed slash VFX; B deliberately shows its authored blade/body
+motion without reusing A's horizontal slash in the wrong direction.
 
-## Prototype boundaries
+## World-art integration
 
-This is one hand-authored traversal/combat lane, one enemy archetype, one light attack, and a short completion loop. It is not a content-complete game: no controller/touch *remapping*, audio, save system, procedural maps, weapon tree or production animation pipeline yet. The first art pass is deliberately geometric and replaceable.
+- One original 47-tile atlas, **3 visual-only TileMapLayer nodes**, 558 full
+  32px cells, 114 cropped ground-edge pieces, and 15 thin-platform slices.
+- Three original floor Rect2s remain `(-80,470,1010,220)`,
+  `(1070,470,820,220)`, `(2030,470,1210,220)`. Five 18px-high upper platforms
+  keep their original positions and widths of 135/135/126/134/132px.
+- Fractional edges are source-cropped, never stretched or snapped to 32px.
+  Both edges and the underside of thin ledges are preserved by three-piece
+  slicing. No art tile creates physics, navigation or occlusion shapes.
+- Two native Parallax2D layers use the **existing Camera2D's displayed scroll**
+  at 0.24 and 0.52 relative speed, with 1536px repeats. The sky fills the viewport.
+- The old opaque background and manual parallax drawing were removed entirely;
+  they would otherwise hide/compete with the negative-z native layers.
+  Hazard marks, active checkpoints, relay, dust and all gameplay remain.
+- The 120px horizontal camera margins, smoothing, fixed vertical framing,
+  respawn snap, pause and shake cleanup remain unchanged.
 
-## Validation
+All PNGs use lossless import, nearest sampling and no mipmaps. Runtime is native
+Godot only: no Node, Python, web service, runtime terrain plugin or 3D renderer.
+Nearest filtering does not guarantee uniform pixels at non-integer window scales.
+See `docs/ASSET_PROVENANCE.md` and `THIRD_PARTY_NOTICES.md` for asset provenance.
 
-Verified with the official **Godot 4.7.2** Linux engine: editor import, **24/24 gameplay checks**, **17/17 mobile control checks**, and **25/25 camera stability checks at each of 30, 60, and 120 simulated render FPS** passed. The engine-driven gameplay test covers movement, jump/air jump, landing, dodge invulnerability, damage, melee single-hit behavior, enemy death/respawn, checkpoint persistence, win/restart flow, and enemy states. The touch test injects simulated screen-touch/drag events into the game viewport and checks joystick direction, multi-finger concurrent actions, and all six buttons. Camera tests check both the target and the actual displayed center: repeated rapid facing reversals, exact dead-zone margins, smoothing, stable vertical framing, pause/resume, checkpoint respawns, shake cleanup, out-of-bounds teleports, restarts, and 20:9/4:3 window framing. The Android debug APK was successfully exported and validated with `apksigner verify`, `aapt dump badging`, `zipalign`, and `unzip -t`. The APK is structurally installable, but **no Android emulator or physical Android device was connected to this environment**, so real-device launch and feel testing remain to be done. The editor's debugger socket and ADB daemon are unavailable in the restricted authoring environment; they do not prevent exporting the APK.
+## Tests actually run
 
 ```sh
-godot --headless --path /absolute/path/to/pixel_action_poc --editor --quit
-godot --headless --path /absolute/path/to/pixel_action_poc --quit-after 180
-godot --headless --path /absolute/path/to/pixel_action_poc --script res://tests/smoke_test.gd
-godot --headless --path /absolute/path/to/pixel_action_poc --script res://tests/touch_test.gd
-godot --headless --path /absolute/path/to/pixel_action_poc --fixed-fps 60 --script res://tests/camera_test.gd
+GODOT_BIN=/absolute/path/to/Godot_v4.7.2-stable_linux.x86_64 bash verify.sh
 ```
 
-Repeat the camera test with `--fixed-fps 30` and `--fixed-fps 120` for the other simulated render cadences. These checks are not real-device performance benchmarks.
+| Check | Result |
+|---|---:|
+| Editor import + 180-frame main-scene run | Exit 0 |
+| Unmodified v0.4 gameplay | 24/24 |
+| Unmodified v0.4 touch | 17/17 |
+| Unmodified v0.4 native animation | 62/62 |
+| Unmodified camera at 30 / 60 / 120 simulated render FPS | 25/25 each |
+| v0.5 combo logic, native B assets and real main-scene input | 78/78 |
+| v0.5 map at 30 / 60 / 120 simulated render FPS | 362/362 each |
+| **Project regression total** | **1342/1342** |
+| Independent combo boundary / scheduling equivalence | 369/369 |
+| Independent actual drawable geometry + live-enemy physics | 719/719 |
+| Independent cross-frame hit-stop | 9/9 |
+| **Combined distinct suite assertions executed** | **2439/2439** |
+
+Logs are in `test_logs/`; detailed scope and known limits are in
+`docs/VALIDATION.md`. Independent scripts are under `tests/independent/`.
+The map tests exhaust all 256 raw neighbor arrangements, check exact
+visual/collider coverage, actual top/bottom collision rays, gap emptiness,
+native parallax and lack of per-frame tile changes. Combo tests exercise actual
+main-scene keyboard/touch, airborne chain, global hit-stop, held-input suppression,
+interruption and respawn, in addition to the unchanged legacy compatibility seek.
+
+The editor emitted the environment's blocked local debugger listener and
+unavailable local Android build-tools warning; resource import and tests still
+exited 0. Source validation is not a claim that an APK was exported or a phone
+was tested. Any separately supplied APK has its own export/validation record.
+
+## Project layout / remaining work
+
+`scripts/player.gd` remains the movement controller; `combo_machine.gd` is its
+single attack authority. `world.gd` remains the level/checkpoint/camera owner;
+`world_art.gd` is visual-only. `player_visual.gd`, enemy and touch scripts retain
+the original contracts. `docs/README_v04.md` is the historical v0.4 documentation.
+
+Still one short authored lane and one enemy archetype: no save system, audio,
+procedural generation, roguelite progression, controller remapping or weapon
+tree. The second/third combat zones share repeatable scenery rather than unique
+bespoke landmarks. Enemies and dynamic markers remain code-drawn. Android
+launch/feel, rapid-reversal pixel shimmer, fill-rate and screenshot acceptance
+remain unverified; publishing the source does not establish Android readiness.
+During the original candidate integration, the separate v0.4 project and both
+proofs were left untouched, and that integration step made no Git commit or push.
+This is historical context, not the current publication status.

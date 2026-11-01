@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Touch overlay fills the landscape viewport
+PASS: Stick drag right presses movement
+PASS: Stick drag left switches movement
+PASS: Stick horizontal dead zone releases movement
+PASS: Second finger attacks while first holds movement
+PASS: Releasing attack leaves movement held
+PASS: Lifting stick finger releases movement
+PASS: Touch button presses jump
+PASS: Touch button releases jump
+PASS: Touch button presses dodge
+PASS: Touch button releases dodge
+PASS: Touch button presses interact
+PASS: Touch button releases interact
+PASS: Touch button presses pause
+PASS: Touch button releases pause
+PASS: Touch button presses restart
+PASS: Touch button releases restart
+RESULT: 17/17 touch checks passed

@@ -1,0 +1,27 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Player spawns on collision terrain
+PASS: Player starts with five health
+PASS: Horizontal acceleration produces movement
+PASS: Ground jump rises
+PASS: Second jump consumes air jump
+PASS: Player lands on terrain
+PASS: Dodge starts with invulnerability
+PASS: Dodge rejects incoming damage
+PASS: Damage applies outside invulnerability
+PASS: One melee swing damages a target exactly once
+PASS: Three hits kill a sentry and recover its seal
+PASS: Enemy respawn restores health and patrol position
+PASS: Lethal damage enters player death state
+PASS: Player automatically respawns with full health
+PASS: Checkpoint respawn preserves recovered seals
+PASS: Collected sentry stays defeated after player death
+PASS: Three seals and beacon interaction complete the run
+PASS: Full restart clears run progression
+PASS: Full restart respawns all sentries
+PASS: Unengaged enemy patrols
+PASS: Nearby player causes chase and readable wind-up
+PASS: Enemy strike damages the player once
+PASS: Enemy exposes a recovery window after striking
+PASS: Melee hit interrupts enemy with a hurt reaction
+RESULT: 24/24 checks passed

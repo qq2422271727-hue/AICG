@@ -26,20 +26,27 @@ func _draw() -> void:
 	label_at(Vector2(33, 80), "DODGE", 10, Color("99adb7"))
 	draw_rect(Rect2(82, 72, 99, 5), Color("293b49"))
 	draw_rect(Rect2(82, 72, 99 * (1.0 - world.player.dodge_cooldown / 0.62), 5), Color("e4ad71"))
+	# Same attack action on keyboard and touch; B is a timed second tap.
+	var combo = world.player.combo
+	var combo_label := "TAP ATK AGAIN TO CHAIN A > B"
+	if not combo.current_attack.is_empty():
+		combo_label = ("B / RISING CUT" if combo.current_attack == &"attack_b" else "A / FORWARD CUT") + "  /  " + String(combo.phase()).to_upper()
+	label_at(Vector2(33, 105), combo_label, 10, Color("c8cfa9"))
 	label_at(Vector2(w - 249, 35), "RELAY SEALS  %d / 3" % world.seals.size(), 16, Color("ead8b5"))
 	label_at(Vector2(w - 249, 55), "Reach the eastern relay  >", 12, Color("9bb1b9"))
 	var seconds := int(world.elapsed)
 	label_at(Vector2(w - 96, 79), "%02d:%02d" % [seconds / 60, seconds % 60], 13, Color("9bb1b9"))
 	if not world.won:
 		draw_rect(Rect2(18, h - 42, w - 36, 26), Color(0.03, 0.05, 0.085, 0.87))
-		label_at(Vector2(31, h - 24), "A/D  MOVE    SPACE  JUMP x2    J / X  STRIKE    SHIFT / K  DODGE    E  RELAY    R  RESTART", 12, Color("b4c8c6"))
+		label_at(Vector2(31, h - 24), "A/D  MOVE    SPACE  JUMP x2    J / X  TAP A > B    SHIFT / K  DODGE    E  RELAY    R  RESTART", 12, Color("b4c8c6"))
 	if world.message_time > 0 and not world.won:
 		var text: String = world.message
 		var width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x
 		draw_rect(Rect2(w * 0.5 - width * 0.5 - 18, 111, width + 36, 35), Color(0.035, 0.055, 0.09, 0.9))
 		label_at(Vector2((w - width) * 0.5, 134), text, 16, Color("f3d7a5"))
 	if world.player.dead:
-		draw_rect(Rect2(0, 0, w, h), Color(0.025, 0.04, 0.07, 0.65))
+		var death_fade := clampf((world.player.death_time - 0.15) / 0.30, 0, 1)
+		draw_rect(Rect2(0, 0, w, h), Color(0.025, 0.04, 0.07, 0.65 * death_fade))
 		label_at(Vector2(w / 2 - 121, h / 2), "THE SIGNAL FALTERS", 23, Color("e6ba92"))
 		label_at(Vector2(w / 2 - 127, h / 2 + 31), "Returning to the last relay marker…", 14, Color("b4c8c6"))
 	if world.won:

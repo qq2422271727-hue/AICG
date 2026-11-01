@@ -1,0 +1,67 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Original hero manifest and all native PNG resources load
+PASS: Every hero frame uses the fixed 128x96 canvas / (46,77) pivot
+PASS: Untrimmed foot pivot attaches at the unchanged collider's foot
+PASS: Hero uses nearest sampling and never runs an independent animation clock
+PASS: Required clip exists: idle
+PASS: idle shares one atlas and preserves fixed untrimmed regions
+PASS: idle resource dwell weights match the physics sampler
+PASS: Required clip exists: run
+PASS: run shares one atlas and preserves fixed untrimmed regions
+PASS: run resource dwell weights match the physics sampler
+PASS: Required clip exists: attack
+PASS: attack shares one atlas and preserves fixed untrimmed regions
+PASS: attack resource dwell weights match the physics sampler
+PASS: Required clip exists: takeoff
+PASS: takeoff shares one atlas and preserves fixed untrimmed regions
+PASS: takeoff resource dwell weights match the physics sampler
+PASS: Required clip exists: rise
+PASS: rise shares one atlas and preserves fixed untrimmed regions
+PASS: rise resource dwell weights match the physics sampler
+PASS: Required clip exists: fall
+PASS: fall shares one atlas and preserves fixed untrimmed regions
+PASS: fall resource dwell weights match the physics sampler
+PASS: Required clip exists: land
+PASS: land shares one atlas and preserves fixed untrimmed regions
+PASS: land resource dwell weights match the physics sampler
+PASS: Required clip exists: ground_dodge
+PASS: ground_dodge shares one atlas and preserves fixed untrimmed regions
+PASS: ground_dodge resource dwell weights match the physics sampler
+PASS: Required clip exists: air_dodge
+PASS: air_dodge shares one atlas and preserves fixed untrimmed regions
+PASS: air_dodge resource dwell weights match the physics sampler
+PASS: Required clip exists: hurt
+PASS: hurt shares one atlas and preserves fixed untrimmed regions
+PASS: hurt resource dwell weights match the physics sampler
+PASS: Required clip exists: death
+PASS: death shares one atlas and preserves fixed untrimmed regions
+PASS: death resource dwell weights match the physics sampler
+PASS: Hero's decoded RGBA8 atlas payload stays below 8 MiB (no mipmaps)
+PASS: Attack asset totals exactly 0.30 seconds, not the old 0.833-second study
+PASS: Attack contact frames 5-7 begin at .05s and recovery frame 8 at .167s
+PASS: A frozen attack clock freezes its exact atlas frame throughout hit-stop
+PASS: Left-facing mirrors around the same fixed foot pivot
+PASS: Idle wraps without accumulating an extra frame
+PASS: Death holds its final pose instead of wrapping back upright
+PASS: Corrected straight-alpha sword slash loads
+PASS: 18 nonblank FX frames retime to the 0.25-second post-startup window
+PASS: Slash is hidden during the 50 ms attack anticipation
+PASS: Slash starts on the first active attack boundary
+PASS: Slash tail remains visual-only during recovery and flips around its pivot
+PASS: FX frozen-clock sampling cannot apply a second hit-stop
+PASS: Zero attack clock immediately cancels the slash
+PASS: Imported slash retains corrected straight-alpha RGBA (102,208,255,60)
+PASS: Dash ghost freezes atlas frame, pivot and facing independently of the live sprite
+PASS: Dash ghost preserves body position plus foot-anchor attachment
+PASS: Player attack samples the same physics clock without mirroring its collision body
+PASS: Hero and slash share facing without a double mirror
+PASS: Sprite integration does not expand the collider or hurtbox
+PASS: Ground dodge selects its atlas and cancels attack FX
+PASS: Air dodge has a separate authored atlas
+PASS: Damage synchronously cancels attack drawing/FX before the next physics tick
+PASS: Death clears attack state and selects the death atlas immediately
+PASS: Respawn resets drawing and FX with no stale death frame
+HERO_RGBA8_PAYLOAD_BYTES: 3391488
+LIMITATION: headless resources/timing only; no GPU appearance or Android device validation
+RESULT: 62/62 animation checks passed

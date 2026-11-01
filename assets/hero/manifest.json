@@ -1,0 +1,492 @@
+{
+  "schema_version": 2,
+  "character": "ASHWAKE — The Last Relay",
+  "method": "3D fixed-bone IK -> original 2.5D polygon skin -> exact pixel raster",
+  "frame": {
+    "width": 128,
+    "height": 96,
+    "pivot": [
+      46,
+      77
+    ],
+    "nearest": true,
+    "premultiplied": false
+  },
+  "source": "patch-gg/pixelfx MIT skeleton only",
+  "timing_units": "seconds",
+  "root_motion": "none; physics owns all world movement",
+  "sampling": "Use cumulative frame_durations_seconds; fps is nominal only for nonuniform clips.",
+  "proofStats": [
+    {
+      "name": "idle",
+      "frame": [
+        128,
+        96
+      ],
+      "pivot": [
+        46,
+        77
+      ],
+      "bbox": [
+        16,
+        23,
+        59,
+        77
+      ],
+      "colors": 22
+    },
+    {
+      "name": "run",
+      "frame": [
+        128,
+        96
+      ],
+      "pivot": [
+        46,
+        77
+      ],
+      "bbox": [
+        21,
+        27,
+        65,
+        77
+      ],
+      "colors": 22
+    },
+    {
+      "name": "strike",
+      "frame": [
+        128,
+        96
+      ],
+      "pivot": [
+        46,
+        77
+      ],
+      "bbox": [
+        25,
+        35,
+        102,
+        77
+      ],
+      "colors": 22
+    },
+    {
+      "name": "dodge",
+      "frame": [
+        128,
+        96
+      ],
+      "pivot": [
+        46,
+        77
+      ],
+      "bbox": [
+        24,
+        38,
+        90,
+        77
+      ],
+      "colors": 21
+    }
+  ],
+  "animations": {
+    "attack_b": {
+      "state": "attack_b",
+      "file": "attack_b_sheet.png",
+      "frames": 15,
+      "frame_durations_seconds": [0.01675, 0.01675, 0.01675, 0.01675, 0.025, 0.025, 0.025, 0.025, 0.019, 0.019, 0.019, 0.019, 0.019, 0.019, 0.019],
+      "total_seconds": 0.3,
+      "loop": false,
+      "grounded": true,
+      "pivot": [46, 77],
+      "frame_size": [128, 96],
+      "layout": "horizontal",
+      "root_motion": [0, 0]
+    },
+    "idle": {
+      "state": "idle",
+      "file": "idle_sheet.png",
+      "frames": 8,
+      "fps": 8,
+      "frame_durations_seconds": [
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "total_seconds": 1,
+      "loop": true,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ]
+    },
+    "run": {
+      "state": "run",
+      "file": "run_sheet.png",
+      "frames": 12,
+      "fps": 16,
+      "frame_durations_seconds": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "total_seconds": 0.75,
+      "loop": true,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ]
+    },
+    "attack": {
+      "state": "attack",
+      "file": "attack_sheet.png",
+      "frames": 15,
+      "fps": 50,
+      "frame_durations_seconds": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.039,
+        0.039,
+        0.039,
+        0.019,
+        0.019,
+        0.019,
+        0.019,
+        0.019,
+        0.019,
+        0.019
+      ],
+      "total_seconds": 0.3,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "contact": [
+        5,
+        6,
+        7
+      ],
+      "phases": [
+        {
+          "name": "startup",
+          "start_seconds": 0,
+          "end_seconds": 0.05,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "name": "active",
+          "start_seconds": 0.05,
+          "end_seconds": 0.167,
+          "frames": [
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "recovery",
+          "start_seconds": 0.167,
+          "end_seconds": 0.3,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        }
+      ]
+    },
+    "takeoff": {
+      "state": "takeoff",
+      "file": "takeoff_sheet.png",
+      "frames": 3,
+      "fps": 60,
+      "frame_durations_seconds": [
+        0.016,
+        0.017,
+        0.017
+      ],
+      "total_seconds": 0.05,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "rise": {
+      "state": "rise",
+      "file": "rise_sheet.png",
+      "frames": 4,
+      "fps": 12,
+      "frame_durations_seconds": [
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333,
+        0.08333333333333333
+      ],
+      "total_seconds": 0.333333,
+      "loop": true,
+      "grounded": false,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "fall": {
+      "state": "fall",
+      "file": "fall_sheet.png",
+      "frames": 4,
+      "fps": 10,
+      "frame_durations_seconds": [
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ],
+      "total_seconds": 0.4,
+      "loop": true,
+      "grounded": false,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "land": {
+      "state": "land",
+      "file": "land_sheet.png",
+      "frames": 4,
+      "fps": 48,
+      "frame_durations_seconds": [
+        0.021,
+        0.021,
+        0.021,
+        0.02
+      ],
+      "total_seconds": 0.083,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "ground_dodge": {
+      "state": "ground_dodge",
+      "file": "ground_dodge_sheet.png",
+      "frames": 5,
+      "fps": 22.7272727,
+      "frame_durations_seconds": [
+        0.044,
+        0.044,
+        0.044,
+        0.044,
+        0.044
+      ],
+      "total_seconds": 0.22,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "air_dodge": {
+      "state": "air_dodge",
+      "file": "air_dodge_sheet.png",
+      "frames": 5,
+      "fps": 22.7272727,
+      "frame_durations_seconds": [
+        0.044,
+        0.044,
+        0.044,
+        0.044,
+        0.044
+      ],
+      "total_seconds": 0.22,
+      "loop": false,
+      "grounded": false,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "hurt": {
+      "state": "hurt",
+      "file": "hurt_sheet.png",
+      "frames": 4,
+      "fps": 20,
+      "frame_durations_seconds": [
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "total_seconds": 0.2,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": false
+    },
+    "death": {
+      "state": "death",
+      "file": "death_sheet.png",
+      "frames": 5,
+      "fps": 8,
+      "frame_durations_seconds": [
+        0.09,
+        0.11,
+        0.13,
+        0.15,
+        0.2
+      ],
+      "total_seconds": 0.68,
+      "loop": false,
+      "grounded": true,
+      "pivot": [
+        46,
+        77
+      ],
+      "frame_size": [
+        128,
+        96
+      ],
+      "layout": "horizontal",
+      "root_motion": [
+        0,
+        0
+      ],
+      "hold_last": true
+    }
+  }
+}

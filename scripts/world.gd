@@ -5,6 +5,7 @@ const EnemyScript = preload("res://scripts/enemy.gd")
 const EffectsScript = preload("res://scripts/effects.gd")
 const HudScript = preload("res://scripts/hud.gd")
 const TouchControlsScript = preload("res://scripts/touch_controls.gd")
+const WorldArtScript = preload("res://scripts/world_art.gd")
 
 const CAMERA_DEAD_ZONE := 120.0
 const CAMERA_MIN_X := 480.0
@@ -27,13 +28,18 @@ var won := false
 var message := "Recover three seals. Wake the eastern relay."
 var message_time := 5.0
 var hit_stop := 0.0
+var frame_time_scale := 1.0
 var shake := 0.0
 var ambient_time := 0.0
+var world_art: Node2D
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_setup_input()
 	_build_level()
+	world_art = WorldArtScript.new()
+	add_child(world_art)
+	world_art.build(platforms)
 	effects = EffectsScript.new()
 	effects.z_index = 6
 	effects.process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -131,7 +137,10 @@ func _process(delta: float) -> void:
 		restart_run()
 	if get_tree().paused:
 		return
-	var real_delta := delta / maxf(Engine.time_scale, 0.01)
+	# delta was scaled at the START of this frame. A physics contact may already
+	# have changed Engine.time_scale; dividing by that new .12 erased a 45ms
+	# impact in the contact frame itself. Use the scale that produced this delta.
+	var real_delta := delta / maxf(frame_time_scale, 0.01)
 	if hit_stop > 0:
 		hit_stop -= real_delta
 		if hit_stop <= 0:
@@ -168,6 +177,7 @@ func _process(delta: float) -> void:
 				spawn_burst(Vector2(2960, 375), Color("bcffd7"), 65, 220.0)
 			else:
 				show_message("The relay needs all three seals. Defeat the remaining sentries.")
+	frame_time_scale = Engine.time_scale
 	queue_redraw()
 
 func _update_camera() -> void:
@@ -192,6 +202,7 @@ func _snap_camera_to_player() -> void:
 func restart_run() -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1
+	frame_time_scale = 1.0
 	hit_stop = 0
 	shake = 0
 	won = false
@@ -226,9 +237,6 @@ func show_message(text: String, duration: float = 3.5) -> void:
 func spawn_burst(at: Vector2, color: Color, count: int, speed: float) -> void:
 	effects.burst(at, color, count, speed)
 
-func spawn_ghost(at: Vector2, direction: int) -> void:
-	effects.ghost(at, direction)
-
 func impact(at: Vector2, color: Color, pause_time: float, strength: float) -> void:
 	spawn_burst(at, color, 12, 140)
 	hit_stop = maxf(hit_stop, pause_time)
@@ -239,35 +247,9 @@ func _exit_tree() -> void:
 	Engine.time_scale = 1
 
 func _draw() -> void:
-	# Use the *displayed* camera center: Camera2D.position is only a target
-	# while smoothing, so basing parallax on it made the backdrop twitch.
-	var view_x := camera.get_screen_center_position().x - 480 if is_instance_valid(camera) else 0.0
-	# Layered ruined aqueduct, drawn on a deliberately coarse pixel grid.
-	draw_rect(Rect2(-100, -100, 3500, 880), Color("0c1524"))
-	draw_circle(Vector2(760 + view_x * 0.84, 114), 45, Color("607a7d"))
-	draw_circle(Vector2(744 + view_x * 0.84, 101), 41, Color("0c1524"))
-	for i in range(22):
-		var x := i * 183.0 + view_x * 0.68 - 220
-		var top := 160 + (i * 37 % 95)
-		draw_rect(Rect2(x, top, 83, 420), Color("142436"))
-		draw_rect(Rect2(x - 7, top, 98, 10), Color("1b3041"))
-		for j in range(3):
-			draw_rect(Rect2(x + 18 + j * 22, top + 24, 8, 32), Color("0d1b2d"))
-	for i in range(18):
-		var x := i * 220.0 + view_x * 0.36 - 200
-		draw_rect(Rect2(x, 340 + i % 3 * 16, 45, 270), Color("1b3442"))
-		draw_rect(Rect2(x - 16, 329 + i % 3 * 16, 78, 12), Color("24404b"))
-		draw_rect(Rect2(x + 45, 366, 175, 15), Color("1b3442"))
-	# Foreground masonry: sharp top planes and darker block joints.
-	for rect in platforms:
-		draw_rect(rect, Color("283843"))
-		draw_rect(Rect2(rect.position, Vector2(rect.size.x, 7)), Color("789285"))
-		draw_rect(Rect2(rect.position + Vector2(0, 7), Vector2(rect.size.x, 8)), Color("475e5c"))
-		for x in range(int(rect.position.x) + 14, int(rect.end.x), 53):
-			draw_rect(Rect2(x, rect.position.y + 20, 2, minf(rect.size.y - 20, 36)), Color("1e2c38"))
-		if rect.size.y > 40:
-			for row in range(4):
-				draw_rect(Rect2(rect.position.x, rect.position.y + 43 + row * 41, rect.size.x, 2), Color("1e2c38"))
+	# Static backdrop/masonry now belong EXCLUSIVELY to WorldArt. The old opaque
+	# rectangle would cover negative-z Parallax2D layers; the old view_x math
+	# would apply a second camera transform. Keep only dynamic gameplay markers.
 	for x in [930, 1890]:
 		draw_rect(Rect2(x, 609, 140, 90), Color("301f30"))
 		for i in range(8):

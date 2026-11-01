@@ -1,5 +1,9 @@
 # ASHWAKE：安卓手机首次导入与更新
 
+> v0.5 更新提示：v0.5 合并进公开仓库的 `main` 分支后，已有 GitSync 用户可按下文安全拉取；合并前拉取 `main` 仍是此前的代码。
+> GitSync 用户继续打开 `Documents/AICG/project.godot`。独立提供或从 GitHub 下载的源码 ZIP 请解压到新文件夹；ZIP 解压目录不是 Git 克隆，不会通过 Pull 更新。
+> 请勿把 ZIP 覆盖进 GitSync 管理的目录，也不要覆盖手机本地改动。源码发布、导出或回归通过均不代表已完成安卓实机测试；已安装的独立 APK 不会随源码更新。
+
 适用：Android 12 + Godot 4.7 Android Editor。本项目已用 Godot 4.7.2 检查。
 
 **APK 是成品，不是源码。** 这套流程把 GitHub [公开源码仓库](https://github.com/qq2422271727-hue/AICG) 下载到手机，然后用 Godot 运行。以后更新源码只需拉取，不需要重新安装 APK；已经安装的独立 APK 不会随源码更新。任何人都能查看这个公开仓库，请勿提交密码或私人文件。
