@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <rect width="64" height="64" rx="8" fill="#071421"/>
+  <path d="M4 6h56v52H4z" fill="#0d2230"/>
+  <path d="M8 10h48v44H8z" fill="#102b39"/>
+  <!-- The broken turquoise relay ring. -->
+  <g fill="#4bc2b0">
+    <rect x="20" y="8" width="24" height="4"/>
+    <rect x="12" y="12" width="8" height="4"/>
+    <rect x="8" y="20" width="4" height="24"/>
+    <rect x="12" y="44" width="8" height="4"/>
+    <rect x="20" y="48" width="24" height="4"/>
+    <rect x="44" y="44" width="8" height="4"/>
+    <rect x="52" y="28" width="4" height="16"/>
+    <rect x="52" y="16" width="4" height="8"/>
+    <rect x="44" y="12" width="8" height="4"/>
+  </g>
+  <g fill="#1f7c83">
+    <rect x="20" y="12" width="24" height="4"/>
+    <rect x="12" y="20" width="4" height="20"/>
+    <rect x="48" y="28" width="4" height="12"/>
+    <rect x="20" y="44" width="24" height="4"/>
+  </g>
+  <!-- Amber beacon and pale ceramic mask. -->
+  <g fill="#f09b5c">
+    <rect x="30" y="16" width="4" height="8"/>
+    <rect x="26" y="20" width="4" height="8"/>
+    <rect x="34" y="20" width="4" height="8"/>
+  </g>
+  <path d="M24 28h16v12h-4v4h-8v-4h-4z" fill="#e0d1b6"/>
+  <rect x="28" y="32" width="4" height="4" fill="#152c38"/>
+  <rect x="36" y="32" width="4" height="4" fill="#152c38"/>
+  <rect x="28" y="40" width="8" height="4" fill="#b99d85"/>
+  <path d="M20 52h24v4H20z" fill="#ee9a61"/>
+  <rect x="8" y="56" width="48" height="4" fill="#071421"/>
+</svg>

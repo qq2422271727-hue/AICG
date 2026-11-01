@@ -1,0 +1,46 @@
+# Godot 4 generated cache (includes local export credentials).
+.godot/
+.import/
+*.translation
+
+# Keep *.gd.uid, *.import sidecars, project.godot and export_presets.cfg.
+# They preserve resource identity, import settings and portable export settings.
+
+# Generated Android/build outputs; never source assets.
+/android/build/
+/.gradle/
+/build/
+/dist/
+/exports/
+*.apk
+*.aab
+*.apks
+*.idsig
+*.pck
+
+# Signing keys, credentials and machine-local configuration.
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+.ssh/
+.aws/
+.config/gh/
+.git-credentials
+id_rsa
+id_ed25519
+export_credentials.cfg
+local.properties
+
+# Editor/OS temporary files.
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo
+*~

@@ -1,0 +1,35 @@
+; Ashwake — original action prototype. Open with Godot 4.3 or later.
+config_version=5
+
+[application]
+config/name="ASHWAKE — The Last Relay"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/description="An original, compact side-scrolling action prototype."
+config/version="0.3-stable-camera-preview"
+config/icon="res://assets/icon.svg"
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/handheld/orientation=0
+window/stretch/mode="canvas_items"
+textures/default_filters/use_nearest_mipmap_filter=false
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.035, 0.055, 0.09, 1)
+
+[physics]
+common/physics_ticks_per_second=60
+
+[layer_names]
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Terrain"
+2d_physics/layer_3="Enemy"
