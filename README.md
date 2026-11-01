@@ -1,17 +1,17 @@
-# ASHWAKE — The Last Relay · v0.5
+# ASHWAKE — The Last Relay · v0.5.1
 
 **A complete playable Godot project, not the isolated combat/map proof.**
 The ceramic-masked courier must recover three seals from ruined sentries,
-cross two gaps and activate the eastern relay. Version 0.5 integrates a
-second attack and original aqueduct pixel artwork into the existing game.
+cross two gaps and activate the eastern relay. Version 0.5 introduced a
+second attack and original aqueduct pixel artwork. Version 0.5.1 refines the
+run cycle, weapon-aligned slash effects, mobile controls and world scale.
 
-Status: source validated with **Godot 4.7.2.stable.official.ed1daf0bf**,
-Compatibility renderer. The v0.5 integration was prepared independently of
-the frozen v0.4 source. Once v0.5 is merged into the public repository's
-`main` branch, GitSync users can obtain it through the update workflow below.
-No physical Android device, emulator or real-GPU visual playtest was performed
-by the integration task. Automated success does not establish mobile frame
-rate, touch feel or rendered pixel quality.
+Baseline source validated with **Godot 4.7.2.stable.official.ed1daf0bf**,
+Compatibility renderer. The original v0.5 integration was prepared
+independently of frozen v0.4; subsequent updates are published in the public
+repository's `main` branch. User feedback from Android Godot informed the
+v0.5.1 visual adjustments. Developer-side headless checks do not establish
+mobile frame rate or a completed v0.5.1 device visual acceptance test.
 
 ## Open and play
 
@@ -19,8 +19,8 @@ rate, touch feel or rendered pixel quality.
 2. On the Android Editor, choose one source workflow:
    - **GitHub / GitSync:** follow `ANDROID_SYNC_GUIDE.md` to clone the public
      repository's `main` branch into `Documents/AICG`, or safely pull updates
-     into your existing clean clone after v0.5 has been merged into `main`.
-   - **Standalone source ZIP:** extract the supplied v0.5 source ZIP, or a
+     into your existing clean clone after the update is published to `main`.
+   - **Standalone source ZIP:** extract a complete source ZIP, or a
      source ZIP downloaded from GitHub, into a new folder and import its root
      `project.godot`. GitHub ZIP filenames and top-level folders can vary.
      A ZIP extraction is not a Git clone and does not receive GitSync pulls.
@@ -34,9 +34,8 @@ godot --path /absolute/path/to/AICG
 ```
 
 GitSync pulls the selected branch, not a standalone ZIP or an unmerged branch.
-After v0.5 is merged into `main`, pull `main` and reopen the same
+When an update is published to `main`, pull `main` and reopen the same
 `Documents/AICG/project.godot`; do not switch to an older ZIP copy.
-Until that merge, pulling `main` still retrieves the previous main-branch code.
 Keep ZIP projects separate from the GitSync-managed folder.
 An independently installed APK never updates when source is changed.
 

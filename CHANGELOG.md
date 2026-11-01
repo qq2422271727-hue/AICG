@@ -1,9 +1,18 @@
 # Changelog
 
+## 0.5.1 — mobile playtest visual refinement
+
+- Refined the 12-frame run gait to address sliding/limping feedback.
+- Realigned A's slash effect to the actual sword animation, without changing hit logic.
+- Enlarged the playable world via Camera2D zoom while retaining camera smoothing.
+- Reduced the visible mobile controls while preserving usable multitouch targets.
+- Focused regression checks only; final Android phone feel awaits the next user playtest.
+
 ## 0.5-combo-world-candidate — 2026-11-01 task
 
-Not published to GitHub; source candidate built from frozen v0.4 plus two local
-isolated proofs. Existing installed APKs are not modified by this source update.
+Originally prepared as an unpublished candidate from frozen v0.4 plus two
+isolated proofs; v0.5 was subsequently published to GitHub. Existing installed
+APKs are not modified by source updates.
 
 ### Playable integration
 

@@ -69,13 +69,13 @@ func _run() -> void:
 	var fx := Slash.new()
 	root.add_child(fx)
 	verify(fx.configure() == OK, "Corrected straight-alpha sword slash loads")
-	verify(fx.sprite_frames.get_frame_count(&"slash") == 18 and is_equal_approx(fx.frame_ends[-1], 0.25), "18 nonblank FX frames retime to the 0.25-second post-startup window")
+	verify(fx.sprite_frames.get_frame_count(&"slash") == 18 and is_equal_approx(fx.frame_ends[-1], 0.174), "18 source FX frames are retained; aligned blade ribbon ends at 224 ms")
 	fx.sync_attack(0.251, 1)
 	verify(not fx.visible, "Slash is hidden during the 50 ms attack anticipation")
 	fx.sync_attack(0.25, 1)
-	verify(fx.visible and fx.frame == 0, "Slash starts on the first active attack boundary")
+	verify(fx.visible and fx.frame == 1, "Slash starts on the first active boundary, skipping the rear-facing source disc")
 	fx.sync_attack(0.10, -1)
-	verify(fx.visible and fx.scale == Vector2(-1, 1), "Slash tail remains visual-only during recovery and flips around its pivot")
+	verify(fx.visible and fx.scale.x < 0 and is_equal_approx(fx.scale.y, Slash.RIBBON_THICKNESS), "Thin slash tail remains visual-only in early recovery and mirrors with the blade")
 	var fx_frame := fx.frame
 	var scale_before := Engine.time_scale
 	for i in range(30):
@@ -107,7 +107,7 @@ func _run() -> void:
 	player.facing = -1
 	player._update_visual(0)
 	verify(player.visual_state == &"attack" and player.visual.frame == frozen_frame and player.scale == Vector2.ONE, "Player attack samples the same physics clock without mirroring its collision body")
-	verify(player.slash.visible and player.slash.scale == Vector2(-1, 1), "Hero and slash share facing without a double mirror")
+	verify(player.slash.visible and player.slash.scale.x < 0, "Hero and weapon-attached slash share facing without a double mirror")
 	var body_shape := player.get_child(0) as CollisionShape2D
 	verify(body_shape.shape.size == Vector2(22, 40) and player.hurtbox().size == Vector2(22, 40), "Sprite integration does not expand the collider or hurtbox")
 	player.dodge_grounded = true

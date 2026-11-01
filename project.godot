@@ -6,9 +6,8 @@ config/name="ASHWAKE — The Last Relay"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/description="An original, compact side-scrolling action prototype."
-; GitSync main pulls receive v0.5 only after this version is merged into main.
-; Before that merge, main still contains the previous main-branch code.
-config/version="0.5"
+; GitSync users pull published updates from the AICG main branch.
+config/version="0.5.1"
 config/icon="res://assets/icon.svg"
 
 [display]

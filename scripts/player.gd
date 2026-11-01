@@ -305,7 +305,7 @@ func _update_visual(delta: float) -> void:
 	visual.modulate = Color(1.5, 1.25, 1.1, opacity) if stagger > 0.09 else Color(1, 1, 1, opacity)
 	# Retain A's licensed effect. Do NOT reuse its horizontal slash for rising B;
 	# B's original blade/body animation remains visible without an incorrect FX.
-	slash.sync_attack(attack_time if next == &"attack" else 0.0, facing)
+	slash.sync_attack(attack_time if next == &"attack" else 0.0, facing, visual.frame)
 
 func _draw() -> void:
 	if is_on_floor() and not dead:

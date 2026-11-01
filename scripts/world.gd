@@ -7,10 +7,16 @@ const HudScript = preload("res://scripts/hud.gd")
 const TouchControlsScript = preload("res://scripts/touch_controls.gd")
 const WorldArtScript = preload("res://scripts/world_art.gd")
 
+const CAMERA_ZOOM := 1.24
+const CAMERA_VIEWPORT_SIZE := Vector2(960, 540)
+const CAMERA_WORLD_RIGHT := 3160.0
 const CAMERA_DEAD_ZONE := 120.0
-const CAMERA_MIN_X := 480.0
-const CAMERA_MAX_X := 2680.0
-const CAMERA_FIXED_Y := 270.0
+const CAMERA_MIN_X := CAMERA_VIEWPORT_SIZE.x * 0.5 / CAMERA_ZOOM
+const CAMERA_MAX_X := CAMERA_WORLD_RIGHT - CAMERA_MIN_X
+# At 1.24x, the y=470 walking surface appears at screen y=386.56, above
+# the bottom thumb controls. Keep this fixed: jumps must not bob the ruins.
+# The top of the view is y=158.26, retaining even an upper-platform double jump.
+const CAMERA_FIXED_Y := 376.0
 
 var player: AshPlayer
 var enemies: Array[AshSentry] = []
@@ -55,14 +61,17 @@ func _ready() -> void:
 	# The world must receive pause/restart input while paused, but the camera
 	# must not inherit that mode and keep sliding behind the pause overlay.
 	camera.process_mode = Node.PROCESS_MODE_PAUSABLE
+	# Only the world is enlarged. TouchHUD remains an unscaled CanvasLayer.
+	camera.zoom = Vector2.ONE * CAMERA_ZOOM
 	camera.position = Vector2(camera_anchor_x, CAMERA_FIXED_Y)
 	camera.limit_left = 0
-	camera.limit_right = 3160
+	camera.limit_right = int(CAMERA_WORLD_RIGHT)
 	camera.limit_top = 0
 	camera.limit_bottom = 620
 	camera.position_smoothing_enabled = true
 	camera.position_smoothing_speed = 6
 	add_child(camera)
+	_snap_camera_to_player()
 	_spawn_enemy(Vector2(660, 449), Vector2(500, 800), 0)
 	_spawn_enemy(Vector2(1490, 449), Vector2(1280, 1660), 1)
 	_spawn_enemy(Vector2(2420, 449), Vector2(2250, 2580), 2)
