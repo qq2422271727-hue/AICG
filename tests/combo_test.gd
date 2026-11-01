@@ -222,7 +222,7 @@ func _run() -> void:
 	verify(player.combo.current_attack == &"attack_a", "Contact cannot advance to B during the same hit-stop")
 	await ticks(22)
 	verify(player.combo.attack_serial == 2 and target.health == 1, "Production A > B hits the same sentry exactly once per stage")
-	verify(player.visual_state == &"attack_b" and not player.slash.visible, "Real B selects its rising atlas and does not reuse A's horizontal slash FX")
+	verify(player.visual_state == &"attack_b" and player.slash.animation == &"attack_b" and player.slash.frame == player.visual.frame, "Real B selects its own rising trail on the same actor frame")
 	await ticks(30)
 	verify(player.combo.current_attack.is_empty() and target.health == 1, "B recovery completes without repeated damage")
 	game.restart_run()

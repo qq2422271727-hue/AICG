@@ -1,5 +1,8 @@
 extends Node2D
 
+## A confirmed contact is a presentation event, never a second damage source.
+signal combat_impact(context: Dictionary)
+
 const PlayerScript = preload("res://scripts/player.gd")
 const EnemyScript = preload("res://scripts/enemy.gd")
 const EffectsScript = preload("res://scripts/effects.gd")
@@ -226,8 +229,7 @@ func restart_run() -> void:
 	_snap_camera_to_player()
 	for enemy in enemies:
 		enemy.respawn()
-	effects.particles.clear()
-	effects.ghosts.clear()
+	effects.clear_all()
 	show_message("Recover three seals. Wake the eastern relay.", 5)
 
 func _on_player_died() -> void:
@@ -246,8 +248,15 @@ func show_message(text: String, duration: float = 3.5) -> void:
 func spawn_burst(at: Vector2, color: Color, count: int, speed: float) -> void:
 	effects.burst(at, color, count, speed)
 
-func impact(at: Vector2, color: Color, pause_time: float, strength: float) -> void:
-	spawn_burst(at, color, 12, 140)
+func impact(at: Vector2, color: Color, pause_time: float, strength: float, context: Dictionary = {}) -> void:
+	if context.is_empty():
+		# Old callers (player hurt, legacy enemy API) retain their original burst.
+		spawn_burst(at, color, 12, 140)
+	else:
+		var presentation := context.duplicate()
+		presentation["point"] = context.get("point", at)
+		presentation["color"] = color
+		combat_impact.emit(presentation)
 	hit_stop = maxf(hit_stop, pause_time)
 	Engine.time_scale = 0.12
 	shake = maxf(shake, strength)

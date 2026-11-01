@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.0 — connected combat and movement presentation
+
+- Re-authored A/B attacking poses with per-frame sword grip/tip tracks, aligning
+  the attacks and their own pixel VFX to the drawn weapon.
+- Kept existing ComboMachine timing, damage reach and hit-stop; added contact
+  context so effects originate at the enemy's contact surface.
+- Added distinct visual A/B hurt reactions and small dash/landing effects while
+  preserving the original collision geometry and mobile multi-touch inputs.
+- Still needs the owner's real-device judgment on the feel of A-to-B chaining,
+  visible impact and effect scale; source validation is not an Android benchmark.
+
 ## 0.5.1 — mobile playtest visual refinement
 
 - Refined the 12-frame run gait to address sliding/limping feedback.

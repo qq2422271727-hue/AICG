@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 		dodge_cooldown = 0.62
 		invulnerable = maxf(invulnerable, 0.19)
 		_interrupt_attack(&"dodge")
-		world.spawn_burst(position, Color("8cfff0"), 5, 70.0)
+		world.effects.dash_start(position + Visual.FOOT_ANCHOR, facing, dodge_grounded)
 	if dodge_time > 0:
 		dodge_time = maxf(0, dodge_time - delta)
 		velocity = Vector2(facing * DODGE_SPEED, 0)
@@ -152,10 +152,11 @@ func _physics_process(delta: float) -> void:
 	elif world.hit_stop <= 0:
 		# Late taps during dodge/hurt may buffer, but interrupts never leak old B.
 		combo.buffer_left = maxf(0.0, combo.buffer_left - delta)
+	var landing_speed := maxf(0.0, velocity.y)
 	move_and_slide()
 	if not was_grounded and is_on_floor():
 		landing_time = 0.083
-		world.spawn_burst(position + Vector2(0, 18), Color("7eaaa0"), 4, 35.0)
+		world.effects.landing(position + Visual.FOOT_ANCHOR, landing_speed, facing)
 	if position.y > 740:
 		health = 0
 		health_changed.emit(health, MAX_HEALTH)
@@ -192,11 +193,64 @@ func _advance_combat(delta: float) -> void:
 			var hitbox: Rect2 = combo.hitbox(position, facing)
 			for enemy in get_tree().get_nodes_in_group("enemies"):
 				if not enemy.dead and hitbox.intersects(enemy.hurtbox()) and combo.register_hit(enemy.get_instance_id()):
-					enemy.take_hit(int(ComboMachine.ATTACKS[combo.current_attack].damage), facing)
+					enemy.take_hit(int(ComboMachine.ATTACKS[combo.current_attack].damage), facing, _hit_context(enemy.hurtbox()))
 		# Contact can start hit-stop in this substep: never advance/cancel to B
 		# in leftover time from the same tick. No duplicate pause or camera shake.
 		if world.hit_stop > 0:
 			break
+
+func _hit_context(target: Rect2) -> Dictionary:
+	# Query the same authored frame used by the hero and trail, without advancing
+	# either visual. The existing generous attack Rect2 remains the damage rule.
+	var clip: StringName = &"attack_b" if combo.current_attack == &"attack_b" else &"attack"
+	var pose: Dictionary = visual.sample_weapon(clip, combo.elapsed, facing)
+	var root_point: Vector2 = position + pose.get("root", Vector2(facing * 10, -8))
+	var tip: Vector2 = position + pose.get("tip", Vector2(facing * 48, -8))
+	var normal := Vector2(facing * 0.5, -1.0).normalized() if clip == &"attack_b" else Vector2(facing, 0.2).normalized()
+	var previous: Dictionary = visual.sample_weapon(clip, maxf(0.0, combo.elapsed - 0.025), facing)
+	if bool(pose.get("valid", false)) and bool(previous.get("valid", false)):
+		var tip_step: Vector2 = pose.tip - previous.tip
+		if tip_step.length_squared() > 4.0:
+			normal = tip_step.normalized()
+	return {
+		"stage": combo.current_attack, "serial": combo.attack_serial,
+		"point": _weapon_contact_point(root_point, tip, target), "normal": normal,
+		"weapon_root": root_point, "weapon_tip": tip
+	}
+
+func _weapon_contact_point(root_point: Vector2, tip: Vector2, target: Rect2) -> Vector2:
+	# Use the first blade/target surface intersection when one exists. At the
+	# unchanged forgiving reach, use the nearest surface point instead of putting
+	# a false contact spark in the enemy's centre or extending the drawn sword.
+	var corners := PackedVector2Array([
+		target.position, Vector2(target.end.x, target.position.y),
+		target.end, Vector2(target.position.x, target.end.y)
+	])
+	var closest := Vector2.ZERO
+	var closest_distance := INF
+	for index in range(4):
+		var intersection = Geometry2D.segment_intersects_segment(root_point, tip, corners[index], corners[(index + 1) % 4])
+		if intersection is Vector2:
+			var distance: float = root_point.distance_squared_to(intersection)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest = intersection
+	if closest_distance < INF:
+		return closest
+	closest = Vector2(clampf(tip.x, target.position.x, target.end.x), clampf(tip.y, target.position.y, target.end.y))
+	if target.has_point(tip):
+		# A blade wholly inside the rectangle still produces a surface flash.
+		var distances := [tip.x - target.position.x, target.end.x - tip.x, tip.y - target.position.y, target.end.y - tip.y]
+		var edge := 0
+		for index in range(1, 4):
+			if float(distances[index]) < float(distances[edge]):
+				edge = index
+		match edge:
+			0: closest.x = target.position.x
+			1: closest.x = target.end.x
+			2: closest.y = target.position.y
+			3: closest.y = target.end.y
+	return closest
 
 func take_hit(amount: int, direction: int) -> bool:
 	if dead or invulnerable > 0:
@@ -303,9 +357,12 @@ func _update_visual(delta: float) -> void:
 	if invulnerable > 0 and dodge_time <= 0 and not dead:
 		opacity = 0.5 if int(anim_time * 18) % 2 == 0 else 1.0
 	visual.modulate = Color(1.5, 1.25, 1.1, opacity) if stagger > 0.09 else Color(1, 1, 1, opacity)
-	# Retain A's licensed effect. Do NOT reuse its horizontal slash for rising B;
-	# B's original blade/body animation remains visible without an incorrect FX.
-	slash.sync_attack(attack_time if next == &"attack" else 0.0, facing, visual.frame)
+	# Hero, sockets and original A/B trails sample this one combat clock. There
+	# is no independently playing VFX animation to outlive a cancel or hit-stop.
+	if next == &"attack" or next == &"attack_b":
+		slash.sync_stage(combo.current_attack, combo.elapsed, facing, visual.sample_weapon(next, combo.elapsed, facing))
+	else:
+		slash.sync_stage(&"", 0.0, facing, {})
 
 func _draw() -> void:
 	if is_on_floor() and not dead:

@@ -1,17 +1,19 @@
-# ASHWAKE — The Last Relay · v0.5.1
+# ASHWAKE — The Last Relay · v0.6.0
 
 **A complete playable Godot project, not the isolated combat/map proof.**
 The ceramic-masked courier must recover three seals from ruined sentries,
 cross two gaps and activate the eastern relay. Version 0.5 introduced a
-second attack and original aqueduct pixel artwork. Version 0.5.1 refines the
-run cycle, weapon-aligned slash effects, mobile controls and world scale.
+second attack and original aqueduct pixel artwork. Version 0.5.1 refined the
+run cycle, sword glow, mobile controls and world scale. Version 0.6.0 adds
+coordinated A/B sword trajectories, attack-specific impact presentation and
+compact dash/landing effects.
 
 Baseline source validated with **Godot 4.7.2.stable.official.ed1daf0bf**,
 Compatibility renderer. The original v0.5 integration was prepared
 independently of frozen v0.4; subsequent updates are published in the public
 repository's `main` branch. User feedback from Android Godot informed the
 v0.5.1 visual adjustments. Developer-side headless checks do not establish
-mobile frame rate or a completed v0.5.1 device visual acceptance test.
+mobile frame rate or a completed v0.6.0 device visual acceptance test.
 
 ## Open and play
 

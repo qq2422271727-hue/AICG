@@ -16,6 +16,8 @@
   "timing_units": "seconds",
   "root_motion": "none; physics owns all world movement",
   "sampling": "Use cumulative frame_durations_seconds; fps is nominal only for nonuniform clips.",
+  "action_tracks": "action_tracks.json",
+  "action_bake_source": "tools/action_bake/bake.mjs; native PNG/JSON only at runtime",
   "proofStats": [
     {
       "name": "idle",
