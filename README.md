@@ -13,7 +13,11 @@ An original, small 2D action-game prototype. A ceramic-masked courier crosses a 
 
 ### Open the source on a phone with Godot 4.7 Android Editor
 
-For repeatable phone updates from the public [ASHWAKE source repository](https://github.com/qq2422271727-hue/AICG), follow the Chinese [Android sync guide](ANDROID_SYNC_GUIDE.md). Public cloning and pulling do not require a GitHub login. Use either that Git clone or the ZIP import below as your active project, not both.
+For repeatable phone updates from the public [ASHWAKE source repository](https://github.com/qq2422271727-hue/AICG), follow the Chinese [Android sync guide](ANDROID_SYNC_GUIDE.md). The recommended phone workflow is **GitSync Client mode**, without Termux: try the public HTTPS clone URL without login if the installed version offers that option; otherwise use the documented GitHub OAuth flow. Choose **Nested clone** into **Documents**, then import **`Documents/AICG/project.godot`** in Godot. GitSync requests broad **All files access**, not access limited to the project; review that permission and any OAuth authorization before accepting. Do not create or share a personal access token for this workflow.
+
+For later updates, save and close Godot, check that the phone has no local changes or commits, then manually choose **Pull Changes** in GitSync. Keep automatic sync disabled. Do not use **Force Pull**, **Force Push**, **Push Changes**, or **Sync All Changes** for this download-only workflow; stop and back up if local changes or conflicts appear. Reopen the same project in Godot after a successful pull. No game APK or source ZIP re-download is needed for ordinary source updates; an independently installed APK does not update with the source. This GitSync workflow has not been tested on an Android device in this environment. The guide retains Termux as an optional fallback; public Git cloning/pulling itself does not require login.
+
+For a one-time import without Git, use the ZIP steps below. Keep only one active project: the GitSync clone **or** the ZIP copy, not both.
 
 1. Download `ASHWAKE_v0.3_Godot_Source.zip` to the phone's **Downloads** folder. This archive has `project.godot` at the ZIP root, ready for import.
 2. Open the Godot Android Editor **Project Manager**, choose **Import**, and select that ZIP (or extract it and select its `project.godot`).
