@@ -1,0 +1,36 @@
+--- v0.1.0/locomotion_rig_2d.gd
++++ v0.1.1/locomotion_rig_2d.gd
+@@ -152,7 +152,9 @@
+ 	if moving:
+ 		if not _was_running:
+ 			_seed_feet = true
+-			phase = 0.0
++			# A grounded start must keep one actually displayed sole in place.
++			# phase=0 would plant at +half_stroke and slide the old idle sole there.
++			phase = _grounded_start_phase(previous_display_world, actual_world_displacement) if _was_grounded else 0.0
+ 		phase = fposmod(phase + local_distance / STRIDE_DISTANCE, 1.0)
+ 	elif _was_running:
+ 		_seed_feet = true
+@@ -170,6 +172,23 @@
+ 	_was_running = moving
+ 	queue_redraw()
+ 
++func _grounded_start_phase(previous_world: Array[Vector2], moved_world: Vector2) -> float:
++	# Recover the previous local pose before this tick's displacement. The
++	# subsequent phase increment then cancels relative movement at touchdown.
++	# Prefer the foot with the most support phase remaining. If neither sole is
++	# inside the support interval, retain the legacy phase=0 fallback.
++	var half_stroke: float = STRIDE_DISTANCE * SUPPORT_FRACTION * 0.5
++	var selected_phase: float = 0.0
++	var most_support_left: float = -1.0
++	for index: int in range(2):
++		var prior_local: Vector2 = to_local(previous_world[index] + moved_world)
++		var contact_phase: float = (half_stroke - prior_local.x * _travel_sign) / STRIDE_DISTANCE
++		var support_left: float = SUPPORT_FRACTION - contact_phase
++		if contact_phase >= 0.0 and contact_phase < SUPPORT_FRACTION and support_left > most_support_left:
++			most_support_left = support_left
++			selected_phase = fposmod(contact_phase - (0.5 if index == 1 else 0.0), 1.0)
++	return selected_phase
++
+ func get_blade_markers_world() -> Dictionary:
+ 	return {"base": blade_base.global_position, "tip": blade_tip.global_position}
